@@ -1,7 +1,7 @@
 angular.module("app", [])
     .controller('myCntrl', ['$scope', '$http', function ($scope, $http) {
         $scope.name = "";
-        $scope.displayText = "Type a Name";
+        $scope.displayText = "";
         $scope.click = function () {
             $http({
                 method: 'POST',
@@ -11,7 +11,7 @@ angular.module("app", [])
             }).then(function Success(response) {
                 $scope.displayText = response.data.status;
             }, function Error(response) {
-                $scope.displayText = response.statusText;
+                $scope.displayText = response.data.statusMessage;
             });
         };
     }]);

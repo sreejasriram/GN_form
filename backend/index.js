@@ -13,10 +13,22 @@ app.use(function (req, res, next) {
 });
 
 app.post('/submit', (req, res) => {
-    res.status(200).send({
-        success: true,
-        status:  "Text '" + req.body.name + "' received"
-    })
+    if (req.body != undefined && req.body.name != null && req.body.name.length > 0) {
+        res.status(200).send({
+            success: true,
+            status: "Name '" + req.body.name + "' received"
+        })
+    }
+    else
+    {
+        console.log("empty");
+        res.status(400).send({
+            success: false,
+            statusMessage: "Name is empty"
+        })
+    }
+       
+
 });
 
 const server = app.listen(3001, () => {
